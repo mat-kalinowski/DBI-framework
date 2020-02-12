@@ -1,0 +1,44 @@
+1.)
+
+Obecny katalog zawiera trzy podkatalogi
+- dummy-lib - katalog z kodem Ÿród³owym przyk³adowej biblioteki wspó³dzielonej
+- dummy-proc - katalog z kodem Ÿród³owym przyk³adowego procesu
+- src - katalog z kodem Ÿród³owym programu wykonuj¹cego instrumentacje binarn¹
+
+Aby skompilowaæ trzy programy w katalogach nale¿y wykonaæ w obecnym katalogu komende
+
+$ make arch=<ARCHITEKTURA>
+
+gdzie ARCHITEKTURA mo¿e mieæ dwie wartoœci:
+- x86
+- ARM
+
+Aby wyczyœciæ katalog z plików obiektowych i wykonywalnych nale¿y u¿yæ
+
+$ make clean
+
+2.)
+
+sposób u¿ycia programu injector (zbudowanego w katalogu src):
+
+./injector --pid <nr_pid> --lib <œcie¿ka do biblioteki>
+
+Obydwie flagi s¹ obowi¹zkowe
+
+3.)
+
+Aby sprawdziæ minimalny scenariusz testowy nale¿y wykonaæ nastêpuj¹ce czynnoœci:
+
+- zbudowaæ programy
+
+$ make arch=x86
+
+- odpaliæ proces ( najlepiej w innej konsoli)
+
+$ cd dummy-proc
+$ ./dummy-proc
+
+- wykonaæ test
+
+$ cd ../src
+$ ./injector --pid <pid_dummy_proc> --lib /<path_to_dummy-lib>/injlib.so
